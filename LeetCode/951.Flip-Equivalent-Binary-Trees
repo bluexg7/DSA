@@ -1,8 +1,6 @@
 1. problem link: https://leetcode.com/problems/flip-equivalent-binary-trees/
 
-2. solution:
-
-recursive solution in c++:
+2. solution (recursive, c++):
 
 /**
  * Definition for a binary tree node.
