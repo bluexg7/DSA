@@ -1,0 +1,55 @@
+1. iterative, level traverse
+
+class Solution {
+public:
+    int findBottomLeftValue(TreeNode* root) {
+        vector<TreeNode*> levelNodes;
+        levelNodes.push_back(root);
+        int val = root->val;
+        while (!levelNodes.empty()) {
+            bool flag = false;
+            vector<TreeNode*> tempNodes;
+            for (TreeNode* node : levelNodes) {
+                if (node->left) {
+                    tempNodes.push_back(node->left);
+                }
+                if (node->right) {
+                    tempNodes.push_back(node->right);
+                }
+            }
+            if (tempNodes.empty()) {
+                val = levelNodes.at(0)->val;
+            }
+            
+            levelNodes = tempNodes;
+        }
+        
+        return val;
+    }
+};
+
+2. dfs
+
+class Solution {
+public:
+    int maxDepth = 0;
+    int findBottomLeftValue(TreeNode* root) {
+        int leftMostVal = root->val;
+        helper(root, 0, leftMostVal);
+        
+        return leftMostVal;
+    }
+    
+    void helper(TreeNode* node, int depth, int &leftMostVal) {
+        if (!node) {
+            return;
+        }
+        depth ++;
+        if (depth > maxDepth) {
+            maxDepth = depth;
+            leftMostVal = node->val;
+        }
+        helper(node->left, depth, leftMostVal);
+        helper(node->right, depth, leftMostVal);
+    }
+};
